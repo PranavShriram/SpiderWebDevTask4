@@ -1,0 +1,109 @@
+<html>
+    <head>
+         <link rel="stylesheet" href="/css/bootstrap.min.css">
+         <link rel="stylesheet" href="/css/profile.css">
+
+
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                   
+                    <a class="navbar-brand" href="#"> <img style="margin-bottom: 0.5em" src = "/images/video-camera.svg" width = "30" height="30" ><span style = "margin-top: 10px;margin-left: 0.7em;color: bisque;font-weight:600 " >Think Movie</span></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" >
+                            <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav ml-auto">
+                              <li class="nav-item mr-2">
+                                    <form method = "POST" action = "/profile/anonymus" class="form-inline my-2 my-lg-0">
+                                            <input name = "user" class="form-control mr-sm-2" type="search" placeholder="Search User" aria-label="Search">
+                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+                              </li> 
+                              <li class="nav-item">
+                               <a style = "color: bisque"  href = "/logout" class = "nav-link">Logout</a>
+                              </li>
+                              
+                             
+                            </ul>
+                         
+                    </div> 
+
+            </nav>  
+          
+            <div class = "container">
+                <div class = "row">
+                    <div class = "col-md-4">
+                        <div class = "card mt-4">
+                            <img height="200px" class="pt-4 card-img-top" src="/images/user.svg" alt="Card image cap">
+                            <hr class="my-4">
+                            <div class = "card-body">
+                                    <h5 class="card-title"><%= user %></h5>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class = "col-md-8">
+                         <% if(sessionUser != user) { %>
+                         <div class = "mt-4">User activity is private</div>
+                         <% } %>
+                         <% if(state == "Public" || sessionUser == user){ %>
+                            <div class =  "card mt-4 mb-4 favourites">
+                                 <h4 class="card-header">Favourites</h4>
+                                 <div class = "card-body">
+                                <% for(var i =0;i < favourites.length;i++){ %>
+                                   <div style="font-size: 18px">   <%= favourites[i] %> </div>
+                                <% } %>
+                               </div>
+                            </div>
+                         
+                            <div class =  "card mb-4 watchLater">
+                                    <h4 class="card-header">Watch Later</h4>
+                                    <div class="card-body">
+                                   <% for(var i =0;i < watchLater.length;i++){ %>
+                                       <div style="font-size: 18px">  <%= watchLater[i] %></div>  
+                                   <% } %>
+                                    </div>
+                            </div>
+                            <div class =  "card activity">
+                                    <h4 class="card-header">Activity</h4>
+                                    <div class="card-body">
+
+                                   <% for(var i = 0;i < activity.length;i++){ %>
+                                    <% var d = new Date(parseInt(activity[i].Date)) %>
+                                      <% if(activity[i].name == "watched"){ %>
+                                        <div style="font-size: 18px"><%= d.toString().slice(0,15) %> <%= user %> watched <%= activity[i].object %></div>
+                                      <% }else if(activity[i].name == "favourite"){  %>
+                                        <div style="font-size: 18px"><%= d.toString().slice(0,15) %> <%= user %> added <%= activity[i].object %> to favourites</div>
+                                      <% }else if(activity[i].name == "comment"){  %>
+                                        <div style="font-size: 18px"><%= d.toString().slice(0,15) %> <%=  user %> commented on <%= activity[i].object %></div>
+                                      <% } %>
+                                     
+                                   <% } %>
+                                    </div>
+                            </div>
+                         <%  } %>
+                            <% if(sessionUser == user){ %>
+                               <% if(state == "Public") { %>
+                               <form method="POST" action="/private">
+                                 <button class = "ml-4 btn btn-primary mt-4">Make activity Private</button>
+                               </form>  
+                               <% } else { %>
+                                <form method="POST" action="/public">
+                                 <button class = "ml-4 btn btn-primary mt-4">Make activity Public</button>
+                                </form>
+                               <% } %>
+                            <%  } %>         
+                       </div>
+                </div>   
+            </div>
+
+          
+
+    
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="/js/bootstrap.min.js"></script>
+          <script src = "/js/homepage.js"></script>
+  </body>
+</html>

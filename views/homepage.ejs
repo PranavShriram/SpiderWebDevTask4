@@ -1,0 +1,76 @@
+<html>
+    <head>
+         <link rel="stylesheet" href="/css/bootstrap.min.css">
+         <link rel="stylesheet" href="/css/homepage.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+       
+
+    </head>
+    <body> 
+        <button class="btn red" id="authorize-button">Log In</button>
+        <button class="btn red" id="signout-button">Log Out</button>
+      <button onclick="like()">LIKE</button>
+            <nav  class="navbar navbar-expand-lg navbar-light bg-dark">
+                   
+                    <a class="navbar-brand" href="#"> <img style="margin-bottom: 0.5em" src = "/images/video-camera.svg" width = "30" height="30" ><span style = "margin-top: 10px;margin-left: 0.7em;color: bisque;font-weight:600 " >Think Movie</span></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" >
+                            <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item mr-2">
+                                    <form method = "POST" action = "/profile/anonymus" class="form-inline my-2 my-lg-0">
+                                            <input name = "user" class="form-control mr-sm-2" type="search" placeholder="Search User" aria-label="Search">
+                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+                                </li> 
+                                <li class="nav-item">
+                                    <a style="color: white"  href = "/profile" class = "nav-link">My Profile</a>
+                                </li>
+                              <li class="nav-item">
+                               <a style="color: white"  href = "/logout" class = "nav-link">Logout</a>
+                              </li>
+                           
+                             
+                            </ul>
+                    </div> 
+
+            </nav>
+            <div class = "container mt-4" id = "message">
+              
+            </div>  
+            <div class = "container" id = "search">
+                <div class = "mt-4 jumbotron">
+                    <h5>Search for any movie or TV Show..</h5>
+                    <form class = "search">
+                        <div class = "form-group">
+                          <input onkeyup="keyUpListener()" class = "searchInput form-control" type = "text">
+                        </div>  
+                    </form>
+                    <button onclick="searchMethodTitle()" class="btn btn-primary active byTitle" role="button" aria-pressed="true">Title</button>
+                    <button onclick="searchMethodID()" class="btn btn-primary byID" role="button" aria-pressed="true">ID</button>
+                </div>
+            </div>
+
+            <div class = "container" id = "details" >
+                <div  class = "row movieContainer1 row-eq-height">
+
+                </div>
+            </div>
+            <div class = "container" id = "moreDetails">
+                 <div class = "card">
+                   
+                 </div>
+            </div>
+
+    
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="/js/bootstrap.min.js"></script>
+          <script src = "/js/homepage.js"></script>
+          <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">  </script>
+
+  </body>
+</html>

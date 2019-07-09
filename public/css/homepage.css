@@ -1,0 +1,44 @@
+body
+{   
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); 
+}
+
+.card
+{
+    margin-bottom: 20px;
+}
+
+.card>img
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+  #moreDetails
+{
+    z-index: 100;
+   position: absolute;
+   margin-left: 19%;
+}
+/*
+@media only screen and (min-width:1140px)
+{
+    #moreDetails
+    {
+        left:15%;
+    }
+}
+
+@media only screen and (max-width:1140px) and (min-width:720px)
+{
+    #moreDetails
+    {
+        left:10%;
+    }
+}
+@media only screen and (min-width:546)
+{
+    #moreDetails
+    {
+       left:0;
+    }
+} */

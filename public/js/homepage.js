@@ -11,83 +11,272 @@ var searchMethod = "title";
 moreDetailsContainer.style.display = "none";
 
 
-//========================
-const CLIENT_ID = '360652545912-m7upatrca898t9kk4cd9i1mar7chbbtb.apps.googleusercontent.com';
-const DISCOVERY_DOCS = [
-  'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
-];
-const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
-
-const authorizeButton = document.getElementById('authorize-button');
-const signoutButton = document.getElementById('signout-button');
-const content = document.getElementById('content');
-const channelForm = document.getElementById('channel-form');
-const channelInput = document.getElementById('channel-input');
-const videoContainer = document.getElementById('video-container');
 
 
-const defaultChannel = 'techguyweb';
 
-// Form submit and change channel
-channelForm.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const channel = channelInput.value;
-
-  getChannel(channel);
-});
-
-// Load auth2 library
-function handleClientLoad() {
-  gapi.load('client:auth2', initClient);
+var resString = ""
+var res2 = [  {
+  "Title": "Batman Begins",
+  "Year": "2005",
+  "Rated": "PG-13",
+  "Released": "15 Jun 2005",
+  "Runtime": "140 min",
+  "Genre": "Action, Adventure",
+  "Director": "Christopher Nolan",
+  "Writer": "Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)",
+  "Actors": "Christian Bale, Michael Caine, Liam Neeson, Katie Holmes",
+  "Plot": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.",
+  "Language": "English, Urdu, Mandarin",
+  "Country": "USA, UK",
+  "Awards": "Nominated for 1 Oscar. Another 14 wins & 72 nominations.",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BZmUwNGU2ZmItMmRiNC00MjhlLTg5YWUtODMyNzkxODYzMmZlXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
+  "Ratings": [
+      {
+          "Source": "Internet Movie Database",
+          "Value": "8.2/10"
+      },
+      {
+          "Source": "Rotten Tomatoes",
+          "Value": "84%"
+      },
+      {
+          "Source": "Metacritic",
+          "Value": "70/100"
+      }
+  ],
+  "Metascore": "70",
+  "imdbRating": "8.2",
+  "imdbVotes": "1,194,010",
+  "imdbID": "tt0372784",
+  "Type": "movie",
+  "DVD": "18 Oct 2005",
+  "BoxOffice": "$204,100,000",
+  "Production": "Warner Bros. Pictures",
+  "Website": "https://www.warnerbros.com/batman-begins",
+  "Response": "True"
+},   {
+  "Title": "The Dark Knight",
+  "Year": "2008",
+  "Rated": "PG-13",
+  "Released": "18 Jul 2008",
+  "Runtime": "152 min",
+  "Genre": "Action, Crime, Drama, Thriller",
+  "Director": "Christopher Nolan",
+  "Writer": "Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)",
+  "Actors": "Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine",
+  "Plot": "When the menace known as The Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham. The Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+  "Language": "English, Mandarin",
+  "Country": "USA, UK",
+  "Awards": "Won 2 Oscars. Another 152 wins & 155 nominations.",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+  "Ratings": [
+      {
+          "Source": "Internet Movie Database",
+          "Value": "9.0/10"
+      },
+      {
+          "Source": "Rotten Tomatoes",
+          "Value": "94%"
+      },
+      {
+          "Source": "Metacritic",
+          "Value": "84/100"
+      }
+  ],
+  "Metascore": "84",
+  "imdbRating": "9.0",
+  "imdbVotes": "2,070,977",
+  "imdbID": "tt0468569",
+  "Type": "movie",
+  "DVD": "09 Dec 2008",
+  "BoxOffice": "$533,316,061",
+  "Production": "Warner Bros. Pictures/Legendary",
+  "Website": "http://thedarkknight.warnerbros.com/",
+  "Response": "True"
+},
+{
+  "Title": "The Dark Knight Rises",
+  "Year": "2012",
+  "Rated": "PG-13",
+  "Released": "20 Jul 2012",
+  "Runtime": "164 min",
+  "Genre": "Action, Thriller",
+  "Director": "Christopher Nolan",
+  "Writer": "Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)",
+  "Actors": "Christian Bale, Gary Oldman, Tom Hardy, Joseph Gordon-Levitt",
+  "Plot": "Eight years after the Joker's reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced from his exile to save Gotham City, now on the edge of total annihilation, from the brutal guerrilla terrorist Bane.",
+  "Language": "English, Arabic",
+  "Country": "UK, USA",
+  "Awards": "Nominated for 1 BAFTA Film Award. Another 38 wins & 102 nominations.",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_SX300.jpg",
+  "Ratings": [
+      {
+          "Source": "Internet Movie Database",
+          "Value": "8.4/10"
+      },
+      {
+          "Source": "Rotten Tomatoes",
+          "Value": "87%"
+      },
+      {
+          "Source": "Metacritic",
+          "Value": "78/100"
+      }
+  ],
+  "Metascore": "78",
+  "imdbRating": "8.4",
+  "imdbVotes": "1,389,960",
+  "imdbID": "tt1345836",
+  "Type": "movie",
+  "DVD": "03 Dec 2012",
+  "BoxOffice": "$448,130,642",
+  "Production": "Warner Bros. Pictures",
+  "Website": "http://www.thedarkknightrises.com/",
+  "Response": "True"
+},
+{
+  "Title": "Inception",
+  "Year": "2010",
+  "Rated": "PG-13",
+  "Released": "16 Jul 2010",
+  "Runtime": "148 min",
+  "Genre": "Action, Adventure, Sci-Fi, Thriller",
+  "Director": "Christopher Nolan",
+  "Writer": "Christopher Nolan",
+  "Actors": "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy",
+  "Plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+  "Language": "English, Japanese, French",
+  "Country": "USA, UK",
+  "Awards": "Won 4 Oscars. Another 152 wins & 204 nominations.",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+  "Ratings": [
+      {
+          "Source": "Internet Movie Database",
+          "Value": "8.8/10"
+      },
+      {
+          "Source": "Rotten Tomatoes",
+          "Value": "87%"
+      },
+      {
+          "Source": "Metacritic",
+          "Value": "74/100"
+      }
+  ],
+  "Metascore": "74",
+  "imdbRating": "8.8",
+  "imdbVotes": "1,840,057",
+  "imdbID": "tt1375666",
+  "Type": "movie",
+  "DVD": "07 Dec 2010",
+  "BoxOffice": "$292,568,851",
+  "Production": "Warner Bros. Pictures",
+  "Website": "http://inceptionmovie.warnerbros.com/",
+  "Response": "True"
+}, {
+  "Title": "Dunkirk",
+  "Year": "2017",
+  "Rated": "PG-13",
+  "Released": "21 Jul 2017",
+  "Runtime": "106 min",
+  "Genre": "Action, Drama, History, Thriller, War",
+  "Director": "Christopher Nolan",
+  "Writer": "Christopher Nolan",
+  "Actors": "Fionn Whitehead, Damien Bonnard, Aneurin Barnard, Lee Armstrong",
+  "Plot": "Allied soldiers from Belgium, the British Empire, and France are surrounded by the German Army, and evacuated during a fierce battle in World War II.",
+  "Language": "English, French, German",
+  "Country": "UK, Netherlands, France, USA",
+  "Awards": "Won 3 Oscars. Another 51 wins & 197 nominations.",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BN2YyZjQ0NTEtNzU5MS00NGZkLTg0MTEtYzJmMWY3MWRhZjM2XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_SX300.jpg",
+  "Ratings": [
+      {
+          "Source": "Internet Movie Database",
+          "Value": "7.9/10"
+      },
+      {
+          "Source": "Rotten Tomatoes",
+          "Value": "92%"
+      },
+      {
+          "Source": "Metacritic",
+          "Value": "94/100"
+      }
+  ],
+  "Metascore": "94",
+  "imdbRating": "7.9",
+  "imdbVotes": "469,792",
+  "imdbID": "tt5013056",
+  "Type": "movie",
+  "DVD": "19 Dec 2017",
+  "BoxOffice": "$188,042,171",
+  "Production": "Warner Bros. Pictures",
+  "Website": "http://www.dunkirkmovie.com",
+  "Response": "True"
+}, {
+  "Title": "Interstellar",
+  "Year": "2014",
+  "Rated": "PG-13",
+  "Released": "07 Nov 2014",
+  "Runtime": "169 min",
+  "Genre": "Adventure, Drama, Sci-Fi",
+  "Director": "Christopher Nolan",
+  "Writer": "Jonathan Nolan, Christopher Nolan",
+  "Actors": "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
+  "Plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+  "Language": "English",
+  "Country": "USA, UK, Canada",
+  "Awards": "Won 1 Oscar. Another 43 wins & 143 nominations.",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+  "Ratings": [
+      {
+          "Source": "Internet Movie Database",
+          "Value": "8.6/10"
+      },
+      {
+          "Source": "Rotten Tomatoes",
+          "Value": "72%"
+      },
+      {
+          "Source": "Metacritic",
+          "Value": "74/100"
+      }
+  ],
+  "Metascore": "74",
+  "imdbRating": "8.6",
+  "imdbVotes": "1,304,706",
+  "imdbID": "tt0816692",
+  "Type": "movie",
+  "DVD": "31 Mar 2015",
+  "BoxOffice": "$158,737,441",
+  "Production": "Paramount Pictures",
+  "Website": "http://www.InterstellarMovie.com/",
+  "Response": "True"
+}];
+for(var i = 0;i < res2.length;i++)
+{  
+    
+    resString += `
+      <div class = "col-lg-4">
+       <div class = "row">
+       <div class = "col-lg-1"></div>
+       <div onmouseover="mouseOverEvent(this)" onmouseout = "mouseOutEvent(this)" class = "col-lg-10 card">
+         <img class="card-img-top" src="${res2[i].Poster}" width = "210" height = "310" alt="Card image cap">
+          <div  style = "display:none" class = "card-img-overlay">
+            <h6 class = "card-title">${res2[i].Title} </h6>
+            <div class = "card-text">${res2[i].Plot}</div>
+            <button onclick = "onClickEvent(this)" id = "button${i}" class = "btn btn-success">View More</button>
+          </div>
+       </div>
+       <div class = "col-lg-1"></div>
+       </div>
+      </div>
+    
+    `;
+   
+  
 }
-
-// Init API client library and set up sign in listeners
-function initClient() {
-  gapi.client
-    .init({
-      discoveryDocs: DISCOVERY_DOCS,
-      clientId: CLIENT_ID,
-      scope: SCOPES
-    })
-    .then(() => {
-      // Listen for sign in state changes
-      gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-      // Handle initial sign in state
-      updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-      authorizeButton.onclick = handleAuthClick;
-      signoutButton.onclick = handleSignoutClick;
-    });
-}
-
-// Update UI sign in state changes
-function updateSigninStatus(isSignedIn) {
-  if (isSignedIn) {
-    authorizeButton.style.display = 'none';
-    signoutButton.style.display = 'block';
-    content.style.display = 'block';
-    videoContainer.style.display = 'block';
-    getChannel(defaultChannel);
-  } else {
-    authorizeButton.style.display = 'block';
-    signoutButton.style.display = 'none';
-    content.style.display = 'none';
-    videoContainer.style.display = 'none';
-  }
-}
-
-// Handle login
-function handleAuthClick() {
-  gapi.auth2.getAuthInstance().signIn();
-}
-
-// Handle logout
-function handleSignoutClick() {
-  gapi.auth2.getAuthInstance().signOut();
-}
-//=========================
-
-var res2 = [];
+console.log(resString);
+movieContainer.innerHTML = resString;
 async function like()
 {
   var url = "https://www.googleapis.com/youtube/v3/videos/rate?key=AIzaSyD5N1UyGE-C3yp6CMcuBhDITpFuUxEZ96A&id=jEDaVHmw7r4&rating=like";
@@ -115,8 +304,8 @@ function searchMethodID()
 async function addComment(e)
 {
    try {
-    
-    console.log(e.parentNode.parentNode);
+    var currVideoId = e.parentNode.parentNode.parentNode.parentNode.parentNode.children[3].id;
+
     var value = e.parentNode.parentNode.children[0].children[0].value;
     var index = e.parentNode.parentNode.children[0].children[0].id.slice(5);
     
@@ -140,6 +329,24 @@ async function addComment(e)
             <div class = "mb-3">${returned.value}</div>
          </div>   
       `
+     gapi.client.youtube.commentThreads.insert({
+        "part": "snippet",
+        "resource": {
+          "snippet": {
+            "videoId": `${currVideoId}`,
+            "topLevelComment": {
+              "snippet": {
+                "textOriginal": returned.value
+              }
+            }
+          }
+        }
+      })
+          .then(function(response) {
+                  // Handle the results here (response.result has the parsed body).
+                  console.log("Response", response);
+                },
+                function(err) { console.error("Execute error", err); });
        
       var reqDiv = document.querySelector('.comments'+index);
 
@@ -240,8 +447,7 @@ async function watchLater(e)
   })
   if(res.ok)
   {
-    var returned = await res.json();
-    console.log(returned);
+    console.log("Added");
 
   }
 
@@ -321,11 +527,31 @@ async function findIDMatch(string)
        var res1 = await retObj.json(); 
        console.log(res1);
        var id = res1.items[0].id.videoId; 
-  var resString1 = `<iframe width="1000" height="720" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-  var favouriteString = flagFavourite == 0?`<button style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i  class="fa fa-star-o" aria-hidden="true"></i></button>`:`<button style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i style = "color:gold" class="fa fa-star-o" aria-hidden="true"></i></button>`;
-   
+  var resString1 = `<iframe id = "${id}" width="1000" height="720" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  var favouriteString = flagFavourite == 0?`<button data-toggle="tooltip" data-placement="top" title="Add to favourites" style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i  class="fa fa-star-o"  aria-hidden="true"></i></button>`:`<button data-toggle="tooltip" data-placement="top" title="Add to favourites" style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i style = "color:gold;font-size:20px" class="fa fa-star-o" aria-hidden="true"></i></button>`;
+  var commentsString = likeButtonDisplayStatus?` 
+ <form  class = " mt-2 mb-3">
+  <div class = "row">
+   <div class = "col">
+    <input  id = "input${index}" placeholder = "Add a comment" class = "form-control mr-4">
+   </div>
+   <div class = "col">  
+   <button type = "button" onclick = "addComment(this)" class = "btn btn-primary">Submit</button>
+   </div>           
+  </div> 
+ </form>`:` <form style = "display:none" class = " mt-2 mb-3">
+ <div class = "row">
+  <div class = "col">
+   <input  id = "input${index}" placeholder = "Add a comment" class = "form-control mr-4">
+  </div>
+  <div class = "col">  
+  <button type = "button" onclick = "addComment(this)" class = "btn btn-primary">Submit</button>
+  </div>           
+ </div> 
+</form>`; 
+var likeString = likeButtonDisplayStatus?`<button style = "background-color:white;border:none"  data-toggle="tooltip" data-placement="top" title="Like on youtube" id = "like${id}" onclick="execute(this)"  ><i class = "fa fa-thumbs-up" ></i></button>`:`<button style = "display:none;background-color:white;border:none"  data-toggle="tooltip" data-placement="top" title="Like on youtube" id = "like${id}" onclick="execute(this)"  ><i class = "fa fa-thumbs-up" ></i></button>`;
   var resString = `
-        <div class = "card-header">${res2[index].Title}
+        <div class = "card-header"><b>${res2[index].Title}</b>
             <button onclick = "closeCard(this)" type="button" class="close" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -337,24 +563,23 @@ async function findIDMatch(string)
            ${resString1}
 
            <div class = "mt-4 mb-4">
+           <button id ="${id}" style = "margin-left:70%" onclick="authenticate(this).then(loadClient)" class = "btn btn-primary">Sign in to Google</button>
+             ${likeString}
+           </div>
+           <hr class="my-4">
+
+           <div  style = "margin-left:30%" class = "mt-4 mb-4">
              ${favouriteString}
 
             <button id = "watched${index}" onclick = "watched(this)" class = "btn btn-primary">Watched</button>
             <button id = "watchLater${index}" onclick = "watchLater(this)" class = "btn btn-primary">Watch Later</button>
            </div>
            <hr class="my-4">
-
+          
+          <div class = "comments-head"> 
            <h3 class = "mb-4">Comments</h3>
-           <form class = " mt-2 mb-3">
-            <div class = "row">
-             <div class = "col">
-              <input  id = "input${index}" placeholder = "Add a comment" class = "form-control mr-4">
-             </div>
-             <div class = "col">  
-             <button type = "button" onclick = "addComment(this)" class = "btn btn-primary">Submit</button>
-             </div>           
-            </div> 
-           </form>
+           ${commentsString}
+          </div> 
            ${resString2}
         </div>
   `;
@@ -367,8 +592,10 @@ async function findIDMatch(string)
   }    
 }
 
-function keyUpListener()
-{  
+function keyUpListener(e)
+{   
+   
+ 
    res2 = []
    var searchString = searchInput.value;
    movieContainer.innerHTML = ""
@@ -378,7 +605,7 @@ function keyUpListener()
    {
      findIDMatch(searchString);
    }
-   
+  
 } 
 function closeCard(e)
 {
@@ -455,12 +682,32 @@ async function onClickEvent(e)
   resString2 += "</div>";
  
   var id = res1.items[0].id.videoId; 
-  var resString1 = `<iframe width="1000" height="720" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  var resString1 = `<iframe id = "${id}" width="1000" height="720" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   console.log(res2);
-  var favouriteString = flagFavourite == 0?`<button style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i  class="fa fa-star-o" aria-hidden="true"></i></button>`:`<button style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i style = "color:gold" class="fa fa-star-o" aria-hidden="true"></i></button>`;
-   
+  var favouriteString = flagFavourite == 0?`<button data-toggle="tooltip" data-placement="top" title="Add to favourites" style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i  class="fa fa-star-o"  aria-hidden="true"></i></button>`:`<button data-toggle="tooltip" data-placement="top" title="Add to favourites" style = "background-color:white;border:none" id = "favourite${index}" onclick = "addToFavourite(this)" class = ""><i style = "color:gold;font-size:20px" class="fa fa-star-o" aria-hidden="true"></i></button>`;
+  var commentsString = likeButtonDisplayStatus?` 
+ <form  class = " mt-2 mb-3">
+  <div class = "row">
+   <div class = "col">
+    <input  id = "input${index}" placeholder = "Add a comment" class = "form-control mr-4">
+   </div>
+   <div class = "col">  
+   <button type = "button" onclick = "addComment(this)" class = "btn btn-primary">Submit</button>
+   </div>           
+  </div> 
+ </form>`:` <form style = "display:none" class = " mt-2 mb-3">
+ <div class = "row">
+  <div class = "col">
+   <input  id = "input${index}" placeholder = "Add a comment" class = "form-control mr-4">
+  </div>
+  <div class = "col">  
+  <button type = "button" onclick = "addComment(this)" class = "btn btn-primary">Submit</button>
+  </div>           
+ </div> 
+</form>`; 
+var likeString = likeButtonDisplayStatus?`<button style = "background-color:white;border:none"  data-toggle="tooltip" data-placement="top" title="Like on youtube" id = "like${id}" onclick="execute(this)"  ><i class = "fa fa-thumbs-up" ></i></button>`:`<button style = "display:none;background-color:white;border:none"  data-toggle="tooltip" data-placement="top" title="Like on youtube" id = "like${id}" onclick="execute(this)"  ><i class = "fa fa-thumbs-up" ></i></button>`;
   var resString = `
-        <div class = "card-header">${res2[index].Title}
+        <div class = "card-header"><b>${res2[index].Title}</b>
             <button onclick = "closeCard(this)" type="button" class="close" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -472,24 +719,23 @@ async function onClickEvent(e)
            ${resString1}
 
            <div class = "mt-4 mb-4">
+           <button id ="${id}" style = "margin-left:70%" onclick="authenticate(this).then(loadClient)" class = "btn btn-primary">Sign in to Google</button>
+             ${likeString}
+           </div>
+           <hr class="my-4">
+
+           <div  style = "margin-left:30%" class = "mt-4 mb-4">
              ${favouriteString}
 
             <button id = "watched${index}" onclick = "watched(this)" class = "btn btn-primary">Watched</button>
             <button id = "watchLater${index}" onclick = "watchLater(this)" class = "btn btn-primary">Watch Later</button>
            </div>
            <hr class="my-4">
-
+          
+          <div class = "comments-head"> 
            <h3 class = "mb-4">Comments</h3>
-           <form class = " mt-2 mb-3">
-            <div class = "row">
-             <div class = "col">
-              <input  id = "input${index}" placeholder = "Add a comment" class = "form-control mr-4">
-             </div>
-             <div class = "col">  
-             <button type = "button" onclick = "addComment(this)" class = "btn btn-primary">Submit</button>
-             </div>           
-            </div> 
-           </form>
+           ${commentsString}
+          </div> 
            ${resString2}
         </div>
   `;

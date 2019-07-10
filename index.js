@@ -13,17 +13,17 @@ var express = require('express'),
     Comment = require('./models/Comment');
     
  
-//mongoose.connect('mongodb://localhost:27017/thinkMovie', {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://Pranav:password12345@cluster0-veuo1.mongodb.net/test?retryWrites=true&w=majority",{
-    useNewUrlParser:true,
-    useCreateIndex:true
-}).then(() => {
-    console.log("Connected");
-}).catch(
-    err => {
-        console.log(err);
-    }
-)
+mongoose.connect('mongodb://localhost:27017/thinkMovie', {useNewUrlParser: true});
+// mongoose.connect("mongodb+srv://Pranav:password12345@cluster0-veuo1.mongodb.net/test?retryWrites=true&w=majority",{
+//     useNewUrlParser:true,
+//     useCreateIndex:true
+// }).then(() => {
+//     console.log("Connected");
+// }).catch(
+//     err => {
+//         console.log(err);
+//     }
+// )
 
 app.set("view engine","ejs");    
     
@@ -239,7 +239,7 @@ async function watched(req,res)
                  break;
              }    
         }
-        for(var i =0;i < foundUser.watchLater.length;i++)
+        for(var i = 0;i < foundUser.watchLater.length;i++)
         {
             if(foundUser.watchLater[i] == req.body.Title)
              foundUser.watchLater.splice(i,1);
@@ -277,6 +277,14 @@ async function watchLater(req,res)
                  flag = 1;
                  break;
              }    
+        }
+        for(var i = 0;i < foundUser.watched.length;i++)
+        {
+            if(foundUser.watched[i] == req.body.Title)
+            {
+              foundUser.watched.splice(i,1);
+              break;
+            }   
         }
         if(flag == 0)
          {

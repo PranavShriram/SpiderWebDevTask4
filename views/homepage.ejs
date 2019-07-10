@@ -9,9 +9,7 @@
 
     </head>
     <body> 
-        <button class="btn red" id="authorize-button">Log In</button>
-        <button class="btn red" id="signout-button">Log Out</button>
-      <button onclick="like()">LIKE</button>
+       
             <nav  class="navbar navbar-expand-lg navbar-light bg-dark">
                    
                     <a class="navbar-brand" href="#"> <img style="margin-bottom: 0.5em" src = "/images/video-camera.svg" width = "30" height="30" ><span style = "margin-top: 10px;margin-left: 0.7em;color: bisque;font-weight:600 " >Think Movie</span></a>
@@ -45,9 +43,12 @@
                 <div class = "mt-4 jumbotron">
                     <h5>Search for any movie or TV Show..</h5>
                     <form class = "search">
+
                         <div class = "form-group">
-                          <input onkeyup="keyUpListener()" class = "searchInput form-control" type = "text">
+                          <input onkeyup="keyUpListener(this)" class = "searchInput form-control" type = "text">
                         </div>  
+                        <button style="display: none" type="submit" disabled style="display: none" aria-hidden="true"></button>
+
                     </form>
                     <button onclick="searchMethodTitle()" class="btn btn-primary active byTitle" role="button" aria-pressed="true">Title</button>
                     <button onclick="searchMethodID()" class="btn btn-primary byID" role="button" aria-pressed="true">ID</button>
@@ -69,8 +70,10 @@
           <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
           <script src="/js/bootstrap.min.js"></script>
+          <script src="https://apis.google.com/js/api.js"></script>
+
+          <script src = "/js/like.js"></script> 
           <script src = "/js/homepage.js"></script>
-          <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">  </script>
 
   </body>
 </html>
